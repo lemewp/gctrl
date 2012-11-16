@@ -88,15 +88,19 @@ void keyPressed()
   
   if (!streaming && key == 'g') {
     gcode = null; i = 0;
-    String file = selectInput();
-    if (file == null) return;
-    gcode = loadStrings(file);
-    if (gcode == null) return;
-    streaming = true;
-    stream();
+     selectInput("Open a g code file", "fileSelected");
   }
   
   if (key == 'x') streaming = false;
+}
+
+void fileSelected(File file) {
+  if (file == null) return;
+  
+  gcode = loadStrings(file);
+  if (gcode == null) return;
+  streaming = true;
+  stream();
 }
 
 void stream()
